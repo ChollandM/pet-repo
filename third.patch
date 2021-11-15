@@ -1,0 +1,70 @@
+From 610dccd0008405a79df28b3cfda84bbd31805c99 Mon Sep 17 00:00:00 2001
+From: ChollandM <93794788+ChollandM@users.noreply.github.com>
+Date: Nov 8, 2021, 2:59:19 PM
+
+Third Release
+
+diff --git a/Main/src/main/Main.java b/Main/src/main/Main.java
+index 9be9cba..08e7a77 100644
+--- a/Main/src/main/Main.java
++++ b/Main/src/main/Main.java
+@@ -23,6 +23,16 @@
+                     program.addPets();
+                     break;
+ 
++                case 3:
++                    program.viewAllPets();
++                    program.updatePet();
++                    break;
++
++                case 4:
++                    program.viewAllPets();
++                    program.removePet();
++                    break;
++
+                 case 5:
+                     program.searchByName();
+                     break;
+@@ -39,4 +49,3 @@
+         program.printOptions();
+     }
+ }
+-
+diff --git a/Main/src/main/Program.java b/Main/src/main/Program.java
+index 8fb309d..ab977e3 100644
+--- a/Main/src/main/Program.java
++++ b/Main/src/main/Program.java
+@@ -86,4 +86,33 @@
+         System.out.println("+----------------------+");
+         System.out.format("%d rows in set.\n", numPets);
+     }
++
++    public void updatePet() {
++        System.out.print("Enter the pet ID you want to update");
++        int id = scan.nextInt();
++        if(id>= pets.size()){
++            System.out.println("Invalid input.");
++            return;
++        }
++        System.out.print("Enter new name and new age: ");
++        String name = scan.next();
++        int age = scan.nextInt();
++        String oldName = pets.get(id).name;
++        int oldAge = pets.get(id).age;
++        pets.get(id).name = name;
++        pets.get(id).age = age;
++        System.out.format("%s %d changed to %s %d.\n", oldName, oldAge, name, age);
++    }
++
++    public void removePet() {
++        System.out.print("Enter the pet ID you want to remove");
++        int id = scan.nextInt();
++        if(id>= pets.size()){
++            System.out.println("Invalid input.");
++            return;
++        }
++        System.out.format("%s is removed.\n", pets.get(id).name);
++        pets.remove(id);
++    }
+ }
++

@@ -1,0 +1,122 @@
+From 4e0cbdecf8fb2b666a1dc6ecb20f96d3177b2e7d Mon Sep 17 00:00:00 2001
+From: ChollandM <93794788+ChollandM@users.noreply.github.com>
+Date: Nov 8, 2021, 2:54:17 PM
+
+First Release
+
+diff --git a/Main/src/main/Main.java b/Main/src/main/Main.java
+new file mode 100644
+index 0000000..0e73a3d
+--- /dev/null
++++ b/Main/src/main/Main.java
+@@ -0,0 +1,30 @@
++
++package main;
++
++import java.util.Scanner;
++
++public class Main {
++
++    private static Program program;
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        program = new Program(scanner);
++        boolean exit =  false;
++        System.out.println("Pet Database Program.");
++        while(!exit){
++            program.printOptions();
++            int choice = scanner.nextInt();
++            switch (choice){
++                case 1:
++                    program.viewAllPets();
++                    break;
++
++                case 2:
++                    program.addPets();
++            }
++        }
++        program.printOptions();
++    }
++}
++
++
+diff --git a/Main/src/main/Pet.java b/Main/src/main/Pet.java
+new file mode 100644
+index 0000000..8864d94
+--- /dev/null
++++ b/Main/src/main/Pet.java
+@@ -0,0 +1,13 @@
++
++package main;
++
++public class Pet {
++    String name;
++    int age;
++
++    public Pet(String name, int age) {
++        this.name = name;
++        this.age = age;
++    }
++
++}
+diff --git a/Main/src/main/Program.java b/Main/src/main/Program.java
+new file mode 100644
+index 0000000..03c34eb
+--- /dev/null
++++ b/Main/src/main/Program.java
+@@ -0,0 +1,55 @@
++
++package main;
++
++import java.util.ArrayList;
++import java.util.Scanner;
++
++public class Program {
++    ArrayList<Pet> pets;
++    Scanner scan;
++
++    Program(Scanner scan){
++        pets = new ArrayList<>();
++        this.scan = scan;
++    }
++
++    public void addPets(){
++        int petsAdded = 0;
++        while(true){
++            System.out.print("add pet (name, age): ");
++            String name = scan.next();
++            if(name.equalsIgnoreCase("done")){
++                System.out.println(petsAdded + " pets added.");
++                break;
++            }
++            int age = scan.nextInt();
++            pets.add(new Pet(name, age));
++            petsAdded ++;
++        }
++    }
++
++    public void viewAllPets(){
++        System.out.println("+----------------------+");
++        System.out.format("|%3s | %10s | %4s|\n", "ID", "NAME", "AGE");
++        System.out.println("+----------------------+");
++        for(int i = 0; i<pets.size(); i++){
++            System.out.format("|%3s | %10s | %4d|\n", i, pets.get(i).name, pets.get(i).age);
++        }
++        System.out.println("+----------------------+");
++
++    }
++
++    void printOptions(){
++        System.out.print(
++                "\nWhat would you like to do?\n" +
++                "1) View all pets\n" +
++                "2) Add more pets\n" +
++                "3) Update an existing pet\n" +
++                "4) Remove an existing pet\n" +
++                "5) Search pets by name\n" +
++                "6) Search pets by age\n" +
++                "7) Exit program\n Your choice:");
++    }
++
++
++}

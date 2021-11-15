@@ -1,0 +1,84 @@
+From ada949ea87dfc715e7d554d0434428be6da6c3fe Mon Sep 17 00:00:00 2001
+From: ChollandM <93794788+ChollandM@users.noreply.github.com>
+Date: Nov 8, 2021, 2:57:41 PM
+
+Second Release
+
+diff --git a/Main/src/main/Main.java b/Main/src/main/Main.java
+index 0e73a3d..9be9cba 100644
+--- a/Main/src/main/Main.java
++++ b/Main/src/main/Main.java
+@@ -21,10 +21,22 @@
+ 
+                 case 2:
+                     program.addPets();
++                    break;
++
++                case 5:
++                    program.searchByName();
++                    break;
++
++                case 6:
++                    program.searchByAge();
++                    break;
++
++                case 7:
++                    exit = true;
++                    break;
+             }
+         }
+         program.printOptions();
+     }
+ }
+ 
+-
+diff --git a/Main/src/main/Program.java b/Main/src/main/Program.java
+index 03c34eb..8fb309d 100644
+--- a/Main/src/main/Program.java
++++ b/Main/src/main/Program.java
+@@ -36,6 +36,7 @@
+             System.out.format("|%3s | %10s | %4d|\n", i, pets.get(i).name, pets.get(i).age);
+         }
+         System.out.println("+----------------------+");
++        System.out.format("%d rows in set.\n", pets.size());
+ 
+     }
+ 
+@@ -52,4 +53,37 @@
+     }
+ 
+ 
++    public void searchByName() {
++        System.out.print("Enter a name to search:");
++        String name = scan.next();
++        int numPets = 0;
++        System.out.println("+----------------------+");
++        System.out.format("|%3s | %10s | %4s|\n", "ID", "NAME", "AGE");
++        System.out.println("+----------------------+");
++        for(int i = 0; i<pets.size(); i++){
++            if(pets.get(i).name.equalsIgnoreCase(name)) {
++                System.out.format("|%3s | %10s | %4d|\n", i, pets.get(i).name, pets.get(i).age);
++                numPets++;
++            }
++        }
++        System.out.println("+----------------------+");
++        System.out.format("%d rows in set.\n", numPets);
++    }
++
++    public void searchByAge() {
++        System.out.print("Enter age to search:");
++        int age = scan.nextInt();
++        int numPets = 0;
++        System.out.println("+----------------------+");
++        System.out.format("|%3s | %10s | %4s|\n", "ID", "NAME", "AGE");
++        System.out.println("+----------------------+");
++        for(int i = 0; i<pets.size(); i++){
++            if(pets.get(i).age == age){
++                System.out.format("|%3s | %10s | %4d|\n", i, pets.get(i).name, pets.get(i).age);
++                numPets++;
++            }
++        }
++        System.out.println("+----------------------+");
++        System.out.format("%d rows in set.\n", numPets);
++    }
+ }
